@@ -1,4 +1,4 @@
-package costumerController
+package customerController
 
 import (
 	"bytes"
@@ -18,14 +18,14 @@ import (
 
 type suiteCustomer struct {
 	suite.Suite
-	customerController *CostumerController
+	customerController *CustomerController
 	mock               *customerMockService.CustomerMock
 }
 
 func (s *suiteCustomer) SetupTest() {
 	mock := &customerMockService.CustomerMock{}
 	s.mock = mock
-	s.customerController = &CostumerController{
+	s.customerController = &CustomerController{
 		CostumerService: s.mock,
 	}
 }

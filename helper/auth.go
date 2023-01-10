@@ -13,17 +13,16 @@ func GetUser(c echo.Context) dto.User {
 	var userData dto.User
 	if claims != nil {
 		userData = dto.User{
-			ID: claims.ID,
+			ID:   claims.ID,
 			Role: claims.Role,
 		}
 	} else {
 		claims := middlewareCustomer.GetUserCustomer(c)
 		userData = dto.User{
-			ID: claims.ID,
+			ID:   claims.ID,
 			Role: claims.Role,
 		}
 	}
-
 
 	return userData
 }

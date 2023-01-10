@@ -1,4 +1,4 @@
-package costumerController
+package customerController
 
 import (
 	middlewares "golang/app/middlewares/costumer"
@@ -10,11 +10,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type CostumerController struct {
+type CustomerController struct {
 	CostumerService costumerService.CostumerService
 }
 
-func (u *CostumerController) Register(c echo.Context) error {
+func (u *CustomerController) Register(c echo.Context) error {
 	var user dto.CostumerRegister
 	err := c.Bind(&user)
 	if err != nil {
@@ -46,7 +46,7 @@ func (u *CostumerController) Register(c echo.Context) error {
 	})
 }
 
-func (u *CostumerController) Verifikasi(c echo.Context) error {
+func (u *CustomerController) Verifikasi(c echo.Context) error {
 	var customerVerif dto.CustomerVerif
 	err := c.Bind(&customerVerif)
 	if err != nil {
@@ -69,7 +69,7 @@ func (u *CostumerController) Verifikasi(c echo.Context) error {
 	})
 }
 
-func (u *CostumerController) Login(c echo.Context) error {
+func (u *CustomerController) Login(c echo.Context) error {
 	var costumerLogin dto.CostumerLogin
 	err := c.Bind(&costumerLogin)
 	if err != nil {
@@ -114,7 +114,7 @@ func (u *CostumerController) Login(c echo.Context) error {
 	})
 }
 
-func (u *CostumerController) Logout(c echo.Context) error {
+func (u *CustomerController) Logout(c echo.Context) error {
 	user := c.Get("user").(*jwt.Token)
 
 	isListed := middlewares.CheckTokenCustomer(user.Raw)
