@@ -43,6 +43,7 @@ func DBMigrate(db *gorm.DB) error {
 		model.Customer{},
 		model.CustomerCode{},
 		model.Contact{},
+		model.News{},
 	)
 
 	if err != nil {
