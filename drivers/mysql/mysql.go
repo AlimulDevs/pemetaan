@@ -40,9 +40,9 @@ func (config *ConfigDB) InitDB() *gorm.DB {
 
 func DBMigrate(db *gorm.DB) error {
 	err := db.AutoMigrate(
-
 		model.Customer{},
 		model.CustomerCode{},
+		model.Contact{},
 	)
 
 	if err != nil {
