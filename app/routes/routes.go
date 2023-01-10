@@ -5,10 +5,13 @@ import (
 	middlewareCostumer "golang/app/middlewares/costumer"
 	contactcontroller "golang/controllers/contactController"
 	customerController "golang/controllers/customerController"
+	newscontroller "golang/controllers/newsController"
 	contactrepository "golang/repository/contactRepository"
 	"golang/repository/customerRepository"
+	newsrepository "golang/repository/newsRepository"
 	contactservice "golang/service/contactService"
 	"golang/service/costumerService"
+	newsservice "golang/service/newsService"
 
 	"golang/helper"
 
@@ -26,12 +29,14 @@ func New(db *gorm.DB) *echo.Echo {
 
 	customerRepository := customerRepository.NewCustomerRepository(db)
 	contactRepository := contactrepository.NewRepo(db)
+	newsRepository := newsrepository.NewRepo(db)
 	//end repository
 
 	//service
 
 	costumerService := costumerService.NewcostumerService(customerRepository)
 	contactService := contactservice.NewService(contactRepository)
+	newsService := newsservice.NewService(newsRepository)
 	//end service
 
 	//controller
@@ -41,6 +46,9 @@ func New(db *gorm.DB) *echo.Echo {
 	}
 	contactController := contactcontroller.Controller{
 		Service: contactService,
+	}
+	newsController := newscontroller.Controller{
+		Service: newsService,
 	}
 	//end controller
 
@@ -79,6 +87,14 @@ func New(db *gorm.DB) *echo.Echo {
 	privateCustomer.PUT("/contact/update/:id", contactController.Update)
 	privateCustomer.DELETE("/contact/delete/:id", contactController.Delete)
 	//end routes contact
+
+	// routes news
+	privateCustomer.GET("/news/get-all", newsController.GetAll)
+	privateCustomer.GET("/news/get-by-id/:id", newsController.GetByID)
+	privateCustomer.POST("/news/create", newsController.Create)
+	privateCustomer.PUT("/news/update/:id", newsController.Update)
+	privateCustomer.DELETE("/news/delete/:id", newsController.Delete)
+	//end routes news
 
 	// -->
 
